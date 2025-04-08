@@ -36,3 +36,24 @@ test_workouts = [
     {"name": "Strength Training", "description": "Training for strength"},
     {"name": "Swimming Training", "description": "Training for a swimming competition"},
 ]
+
+import django
+import os
+
+# Set up Django environment
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "octofit_tracker.settings")
+django.setup()
+
+from octofit_tracker.models import User
+
+def test_db_connection():
+    try:
+        # Create a test user
+        test_user = User(username="testuser", email="testuser@example.com", password="password123")
+        test_user.save()
+        print("Test user saved successfully!")
+    except Exception as e:
+        print(f"Error saving test user: {e}")
+
+if __name__ == "__main__":
+    test_db_connection()
